@@ -18,60 +18,112 @@ CREATE SCHEMA IF NOT EXISTS `dndweb` DEFAULT CHARACTER SET utf8 ;
 USE `dndweb` ;
 
 -- -----------------------------------------------------
+-- Table `dndweb`.`assault_rifles`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dndweb`.`assault_rifles` (
+  `idassault_rifle` INT(11) NOT NULL AUTO_INCREMENT,
+  `model` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idassault_rifle`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
 -- Table `dndweb`.`bullets`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dndweb`.`bullets` (
-  `idbullets` INT NOT NULL AUTO_INCREMENT,
-  `bonus_damage` INT NOT NULL,
-  `bonus_critical` INT NOT NULL,
+  `idbullets` INT(11) NOT NULL AUTO_INCREMENT,
+  `bonus_damage` INT(3) NOT NULL,
+  `bonus_critical` INT(3) NOT NULL,
   PRIMARY KEY (`idbullets`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dndweb`.`silencers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dndweb`.`silencers` (
-  `idsilencers` INT NOT NULL AUTO_INCREMENT,
-  `penalty_damage` INT NOT NULL,
-  PRIMARY KEY (`idsilencers`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `dndweb`.`calibre`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dndweb`.`calibre` (
-  `idcalibre` INT NOT NULL AUTO_INCREMENT,
-  `calibre` INT NOT NULL,
+  `idcalibre` INT(11) NOT NULL AUTO_INCREMENT,
+  `calibre` FLOAT(3) NOT NULL,
   PRIMARY KEY (`idcalibre`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 3
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `dndweb`.`guns`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dndweb`.`guns` (
+  `idguns` INT(11) NOT NULL AUTO_INCREMENT,
+  `model` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idguns`),
+  UNIQUE INDEX `idguns_UNIQUE` (`idguns` ASC))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `dndweb`.`launchers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dndweb`.`launchers` (
+  `idlaunchers` INT(11) NOT NULL,
+  `model` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idlaunchers`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `dndweb`.`machine_guns`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dndweb`.`machine_guns` (
+  `idmachine_gun` INT(11) NOT NULL,
+  `model` VARCHAR(45) NULL DEFAULT NULL,
+  `type` VARCHAR(45) NULL DEFAULT NULL,
+  PRIMARY KEY (`idmachine_gun`))
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+
+-- -----------------------------------------------------
+-- Table `dndweb`.`silencers`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `dndweb`.`silencers` (
+  `idsilencers` INT(11) NOT NULL AUTO_INCREMENT,
+  `penalty_damage` INT(3) NOT NULL,
+  PRIMARY KEY (`idsilencers`))
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `dndweb`.`weapons`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `dndweb`.`weapons` (
-  `idweapon` INT NOT NULL AUTO_INCREMENT,
-  `model` VARCHAR(45) NOT NULL,
+  `idweapon` INT(11) NOT NULL AUTO_INCREMENT,
+  `model` VARCHAR(20) NOT NULL,
   `type` VARCHAR(45) NOT NULL,
-  `calibre` INT NOT NULL,
-  `length_bullet` INT NOT NULL,
-  `type_of_dice` INT NOT NULL,
-  `number_of_dice` INT NOT NULL,
-  `penalty` INT NOT NULL,
-  `rate_of_fire` INT NOT NULL,
-  `selective_fire` INT NOT NULL,
-  `range` INT NOT NULL,
-  `weight` INT NOT NULL,
-  `critical_hit` INT NOT NULL,
-  `critical_miss` INT NOT NULL,
-  `armour_penetration` INT NOT NULL,
-  `catridge` INT NOT NULL,
-  `add_catridge` INT NOT NULL,
-  `bullets_idbullets` INT NOT NULL,
-  `silencers_idsilencers` INT NOT NULL,
-  `calibre_idcalibre` INT NOT NULL,
+  `calibre` FLOAT(3) NOT NULL,
+  `length_bullet` INT(3) NOT NULL,
+  `type_of_dice` INT(3) NOT NULL,
+  `number_of_dice` INT(3) NOT NULL,
+  `penalty` INT(3) NOT NULL,
+  `rate_of_fire` FLOAT(3) NOT NULL,
+  `selective_fire` INT(2) NOT NULL,
+  `range` INT(5) NOT NULL,
+  `weight` FLOAT(3) NOT NULL,
+  `critical_hit` INT(3) NOT NULL,
+  `critical_miss` INT(3) NOT NULL,
+  `armour_penetration` INT(3) NOT NULL,
+  `catridge` INT(5) NOT NULL,
+  `add_catridge` INT(5) NOT NULL,
+  `bullets_idbullets` INT(11) NOT NULL,
+  `silencers_idsilencers` INT(11) NOT NULL,
+  `calibre_idcalibre` INT(11) NOT NULL,
   PRIMARY KEY (`idweapon`),
   INDEX `fk_weapons_bullets_idx` (`bullets_idbullets` ASC),
   INDEX `fk_weapons_silencers1_idx` (`silencers_idsilencers` ASC),
@@ -81,59 +133,19 @@ CREATE TABLE IF NOT EXISTS `dndweb`.`weapons` (
     REFERENCES `dndweb`.`bullets` (`idbullets`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_weapons_silencers1`
-    FOREIGN KEY (`silencers_idsilencers`)
-    REFERENCES `dndweb`.`silencers` (`idsilencers`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
   CONSTRAINT `fk_weapons_calibre1`
     FOREIGN KEY (`calibre_idcalibre`)
     REFERENCES `dndweb`.`calibre` (`idcalibre`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_weapons_silencers1`
+    FOREIGN KEY (`silencers_idsilencers`)
+    REFERENCES `dndweb`.`silencers` (`idsilencers`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dndweb`.`guns`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dndweb`.`guns` (
-  `idguns` INT NOT NULL AUTO_INCREMENT,
-  `model` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idguns`),
-  UNIQUE INDEX `idguns_UNIQUE` (`idguns` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dndweb`.`assault_rifles`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dndweb`.`assault_rifles` (
-  `idassault_rifle` INT NOT NULL AUTO_INCREMENT,
-  `model` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idassault_rifle`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dndweb`.`machine_guns`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dndweb`.`machine_guns` (
-  `idmachine_gun` INT NOT NULL,
-  `model` VARCHAR(45) NULL,
-  `type` VARCHAR(45) NULL,
-  PRIMARY KEY (`idmachine_gun`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `dndweb`.`launchers`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `dndweb`.`launchers` (
-  `idlaunchers` INT NOT NULL,
-  `model` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idlaunchers`))
-ENGINE = InnoDB;
+ENGINE = InnoDB
+AUTO_INCREMENT = 2
+DEFAULT CHARACTER SET = utf8;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
