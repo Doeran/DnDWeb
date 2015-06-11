@@ -4,7 +4,9 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,7 +15,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
 import org.hibernate.annotations.Type;
 
 /**
@@ -46,7 +50,6 @@ public class Weapon implements Serializable {
 	@Column (name = "type_of_dice", nullable = false)
 	private int typeOfDice;
 
-	
 	@Column (name = "number_of_dice", nullable = false)
 	private int numberOfDice;
 	
@@ -84,7 +87,9 @@ public class Weapon implements Serializable {
 	
 	@Column (name = "price_weapon", nullable = false)
 	private int priceOfWeapon;
-	
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreCatridge")
+	private List <Catridge> catridge;
 
 	public Weapon() {
 		
