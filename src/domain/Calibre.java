@@ -39,14 +39,18 @@ public class Calibre implements Serializable{
 	private String title;
 	
 	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibre")
-	public List <Weapon> weapons;
+	private List <Weapon> weapons;
 	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreAmmo")
+	private List <Ammo> ammo; 
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreCatridge")
+	private List <Catridge> catridge;
 	
 	public Calibre () {
 	}
 	
-	public Calibre (int idCalibre, float calibre, int sleeveLength, String title) {
-		this.idCalibre=idCalibre;
+	public Calibre (float calibre, int sleeveLength, String title) {
 		this.calibre=calibre;
 		this.sleeveLength=sleeveLength;
 		this.title=title;
