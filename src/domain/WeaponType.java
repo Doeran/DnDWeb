@@ -1,12 +1,16 @@
 package domain;
 
 import java.io.Serializable;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,12 +31,23 @@ public class WeaponType implements Serializable{
 	@Column (name = "title", nullable = false, length = 45)
 	private String title;
 	
+	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "weaponType")
+	private List <Weapon> weapons;
+	
 	public WeaponType (){
 		
 	}
 	
 	public WeaponType (String title){
 		this.title = title;
+	}
+
+	public int getIdWeaponType() {
+		return idWeaponType;
+	}
+
+	public void setIdWeaponType(int idWeaponType) {
+		this.idWeaponType = idWeaponType;
 	}
 
 	public String getTitle() {
@@ -42,6 +57,13 @@ public class WeaponType implements Serializable{
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
+	public List<Weapon> getWeapons() {
+		return weapons;
+	}
+
+	public void setWeapons(List<Weapon> weapons) {
+		this.weapons = weapons;
+	}
 	
 }

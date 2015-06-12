@@ -7,18 +7,18 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "bullets")
+@Table(name = "bullets")
 public class Bullets {
 
 	@Id
 	@GeneratedValue
-	@Column (name = "idbullets")
+	@Column(name = "idbullets")
 	private int idBullets;
-	
-	@Column (name = "bonus_damage")
+
+	@Column(name = "bonus_damage")
 	private int bulletsBonusDamage;
-	
-	@Column (name = "bonus_critical")
+
+	@Column(name = "bonus_critical")
 	private int bulletsBonusCritical;
 
 	public int getIdBullets() {

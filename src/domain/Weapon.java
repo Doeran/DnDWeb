@@ -46,58 +46,60 @@ public class Weapon implements Serializable {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "weapon_type_idweapon_type", nullable = false)
 	private WeaponType weaponType;
-	
-	@Column (name = "type_of_dice", nullable = false)
+
+	@Column(name = "type_of_dice", nullable = false)
 	private int typeOfDice;
 
-	@Column (name = "number_of_dice", nullable = false)
+	@Column(name = "number_of_dice", nullable = false)
 	private int numberOfDice;
-	
-	@Column (name = "add_weapon_damage", nullable = false)
+
+	@Column(name = "add_weapon_damage", nullable = false)
 	private int addWeaponDamage;
-	
-	@Column (name = "penalty", nullable = false)
+
+	@Column(name = "penalty", nullable = false)
 	private int penalty;
-	
-	@Column (name = "rate_of_fire", nullable = false)
+
+	@Column(name = "rate_of_fire", nullable = false)
 	private float rateOfFire;
-	
-	@Column (name = "single_fire", nullable = false, columnDefinition = "TINYINT")
+
+	@Column(name = "single_fire", nullable = false, columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean singleFire;
-	
-	@Column (name = "automatic_fire", nullable = false, columnDefinition = "TINYINT")
+
+	@Column(name = "automatic_fire", nullable = false, columnDefinition = "TINYINT")
 	@Type(type = "org.hibernate.type.NumericBooleanType")
 	private boolean automaticFire;
-	
-	@Column (name = "burst_fire", nullable = false)
+
+	@Column(name = "burst_fire", nullable = false)
 	private int burstFire;
-	
-	@Column (name = "range", nullable = false)
+
+	@Column(name = "range", nullable = false)
 	private int range;
-	
-	@Column (name = "weight_of_weapon", nullable = false)
+
+	@Column(name = "weight_of_weapon", nullable = false)
 	private float weightOfWeapon;
-	
-	@Column (name = "critical_hit", nullable = false)
+
+	@Column(name = "critical_hit", nullable = false)
 	private int criticalHit;
-	
-	@Column (name = "critical_miss", nullable = false)
+
+	@Column(name = "critical_miss", nullable = false)
 	private int criticalMiss;
-	
-	@Column (name = "price_weapon", nullable = false)
+
+	@Column(name = "price_weapon", nullable = false)
 	private int priceOfWeapon;
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreCatridge")
-	private List <Catridge> catridge;
+	private List<Catridge> catridge;
 
 	public Weapon() {
-		
+
 	}
-	
-	public Weapon (String model, Calibre calibre, WeaponType weaponType, int typeOfDice, int numberOfDice, 
-					int addWeaponDamage, int penalty, float rateOfFire, boolean singleFire, boolean automaticFire, 
-					int burstFire, int range, float weightOfWeapon, int criticalHit, int criticalMiss, int priceOfWeapon){
+
+	public Weapon(String model, Calibre calibre, WeaponType weaponType,
+			int typeOfDice, int numberOfDice, int addWeaponDamage, int penalty,
+			float rateOfFire, boolean singleFire, boolean automaticFire,
+			int burstFire, int range, float weightOfWeapon, int criticalHit,
+			int criticalMiss, int priceOfWeapon) {
 	}
 
 	public String getModel() {

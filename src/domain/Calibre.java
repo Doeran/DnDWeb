@@ -14,8 +14,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table (name = "calibre")
-public class Calibre implements Serializable{
+@Table(name = "calibre")
+public class Calibre implements Serializable {
 
 	/**
 	 * 
@@ -23,37 +23,35 @@ public class Calibre implements Serializable{
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	@Column (name = "idcalibre", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "idcalibre", unique = true, nullable = false)
 	private int idCalibre;
-	
-	@Column (name = "calibre", nullable = false )
+
+	@Column(name = "calibre", nullable = false)
 	private float calibre;
 
-
-	@Column (name = "sleeve_length", nullable = false)
+	@Column(name = "sleeve_length", nullable = false)
 	private int sleeveLength;
-	
-	
-	@Column (name = "title", nullable = false)
+
+	@Column(name = "title", nullable = false)
 	private String title;
-	
-	@OneToMany (cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibre")
-	private List <Weapon> weapons;
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreAmmo")
-	private List <Ammo> ammo; 
-	
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibreCatridge")
-	private List <Catridge> catridge;
-	
-	public Calibre () {
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibre")
+	private List<Weapon> weapons;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibre")
+	private List<Ammo> ammo;
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "calibre")
+	private List<Catridge> catridge;
+
+	public Calibre() {
 	}
-	
-	public Calibre (float calibre, int sleeveLength, String title) {
-		this.calibre=calibre;
-		this.sleeveLength=sleeveLength;
-		this.title=title;
+
+	public Calibre(float calibre, int sleeveLength, String title) {
+		this.calibre = calibre;
+		this.sleeveLength = sleeveLength;
+		this.title = title;
 	}
 
 	public int getIdCalibre() {
@@ -96,5 +94,19 @@ public class Calibre implements Serializable{
 		this.weapons = weapons;
 	}
 
-	
+	public List<Ammo> getAmmo() {
+		return ammo;
+	}
+
+	public void setAmmo(List<Ammo> ammo) {
+		this.ammo = ammo;
+	}
+
+	public List<Catridge> getCatridge() {
+		return catridge;
+	}
+
+	public void setCatridge(List<Catridge> catridge) {
+		this.catridge = catridge;
+	}
 }
