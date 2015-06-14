@@ -12,6 +12,6 @@ public interface WeaponDAO {
 
 	public void editWeapon(Weapon weapon);
 
-	public void removeWeapon(String model);
+	public void removeWeapon(int idWeapon);
 
 }
