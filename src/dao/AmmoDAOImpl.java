@@ -13,29 +13,31 @@ public class AmmoDAOImpl implements AmmoDAO {
 
 	@Autowired
 	SessionFactory sessionFactory;
-	
+
 	@Override
 	public void addAmmo(Ammo ammo) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().save(ammo);
 	}
 
 	@Override
+	@SuppressWarnings("unchecked")
 	public List<Ammo> listAmmo() {
-		// TODO Auto-generated method stub
-		return null;
+		return sessionFactory.getCurrentSession().createQuery("from ammo")
+				.list();
 	}
 
 	@Override
 	public void editAmmo(Ammo ammo) {
-		// TODO Auto-generated method stub
-
+		sessionFactory.getCurrentSession().createQuery("edit ammo where ");
 	}
 
 	@Override
 	public void removeAmmo(int idAmmo) {
-		// TODO Auto-generated method stub
-
+		Ammo ammo = (Ammo) sessionFactory.getCurrentSession().load(Ammo.class,
+				idAmmo);
+		if (null != ammo) {
+			sessionFactory.getCurrentSession().delete(ammo);
+		}
 	}
 
 }

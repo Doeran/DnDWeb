@@ -6,7 +6,7 @@ import domain.Sights;
 
 public interface SightsDAO {
 
-	public void addSi(Sights sights);
+	public void addSight(Sights sights);
 
 	public List<Sights> listSights();
 

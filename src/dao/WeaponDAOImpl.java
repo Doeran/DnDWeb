@@ -23,12 +23,11 @@ public class WeaponDAOImpl implements WeaponDAO {
 	@SuppressWarnings("unchecked")
 	public List<Weapon> listWeapon() {
 		return sessionFactory.getCurrentSession()
-				.createQuery("from weapontabl").list();
+				.createQuery("from weapon").list();
 	}
 
 	@Override
 	public void editWeapon(Weapon weapon) {
-		// TODO Auto-generated method stub
 		sessionFactory.getCurrentSession().createQuery("edit weapon where ");
 	}
 
@@ -38,7 +37,6 @@ public class WeaponDAOImpl implements WeaponDAO {
 				Weapon.class, idWeapon);
 		if (null != weapon) {
 			sessionFactory.getCurrentSession().delete(weapon);
-
 		}
 	}
 }
